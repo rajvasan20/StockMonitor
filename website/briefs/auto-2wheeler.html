@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Wheeler Sector Brief | FY2025 | Connected Insights</title>
+    <meta name="description" content="Bajaj has Rs 5,500 Cr EV revenue. Eicher says 'it could be a long time.' 3 annual reports reveal India's biggest strategic divergence in auto.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-light: #132038;
+            --slate: #1e3054;
+            --blue: #3b82f6;
+            --gold: #f59e0b;
+            --gold-dim: rgba(245, 158, 11, 0.15);
+            --green: #4ade80;
+            --green-dim: rgba(34, 197, 94, 0.15);
+            --red: #f87171;
+            --red-dim: rgba(239, 68, 68, 0.15);
+            --purple: #c084fc;
+            --purple-dim: rgba(168, 85, 247, 0.15);
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-bright: #f8fafc;
+            --border: rgba(255,255,255,0.08);
+            --card-bg: rgba(255,255,255,0.03);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 22, 40, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            font-family: 'Newsreader', serif;
+            font-size: 1.25rem; font-weight: 600;
+            color: var(--text-bright); text-decoration: none;
+        }
+        .logo span { color: var(--gold); }
+        .back-link { color: var(--text-dim); text-decoration: none; font-size: 0.85rem; }
+        .back-link:hover { color: var(--text); }
+
+        .article { max-width: 760px; margin: 0 auto; padding: 7rem 2rem 4rem; }
+        .article-meta { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .sector-badge {
+            padding: 0.3rem 0.8rem; background: var(--gold-dim); color: var(--gold);
+            font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; border-radius: 4px;
+        }
+        .article-date { font-size: 0.85rem; color: var(--text-dim); }
+        .article-read { font-size: 0.85rem; color: var(--text-dim); }
+
+        h1 {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 600; color: var(--text-bright);
+            line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 1rem;
+        }
+        .article-subtitle { font-size: 1.15rem; color: var(--text-dim); margin-bottom: 2.5rem; line-height: 1.6; }
+        .company-bar {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            padding: 1.25rem 0; border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border); margin-bottom: 3rem;
+        }
+        .company-chip {
+            padding: 0.35rem 0.85rem; border: 1px solid var(--border);
+            border-radius: 6px; font-size: 0.78rem; color: var(--text-dim); font-weight: 500;
+        }
+
+        .section-marker { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 3rem; margin-bottom: 1rem; }
+        .section-marker .tag {
+            display: inline-block; padding: 0.25rem 0.65rem; font-size: 0.65rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; border-radius: 4px;
+        }
+        .tag-setup { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+        .tag-priced { background: var(--red-dim); color: var(--red); }
+        .tag-alpha { background: var(--green-dim); color: var(--green); }
+        .tag-trust { background: var(--purple-dim); color: var(--purple); }
+        .tag-signal { background: var(--gold-dim); color: var(--gold); }
+
+        h2 { font-family: 'Newsreader', serif; font-size: 1.6rem; color: var(--text-bright); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+        h3 { font-size: 1.05rem; color: var(--text-bright); margin: 2rem 0 0.75rem; font-weight: 600; }
+        p { margin-bottom: 1rem; font-size: 0.95rem; }
+        strong { color: var(--text-bright); }
+        ul, ol { padding-left: 1.25rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+
+        .table-wrap { overflow-x: auto; margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th {
+            text-align: left; padding: 0.75rem 1rem; background: rgba(255,255,255,0.04);
+            color: var(--text-dim); font-weight: 600; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); white-space: nowrap;
+        }
+        td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .callout {
+            padding: 1.25rem 1.5rem; border-left: 3px solid var(--gold);
+            background: var(--gold-dim); border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0; font-size: 0.9rem; color: var(--text);
+        }
+        .callout strong { color: var(--gold); }
+
+        .signal-item {
+            padding: 1.5rem; border: 1px solid var(--border); border-radius: 10px;
+            background: var(--card-bg); margin-bottom: 1.25rem;
+        }
+        .signal-item h4 { font-size: 0.95rem; color: var(--gold); margin-bottom: 0.5rem; font-weight: 600; }
+        .signal-item p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0; line-height: 1.65; }
+
+        .cred-row {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+            background: var(--border); border: 1px solid var(--border);
+            border-radius: 8px; overflow: hidden; margin-bottom: 1px;
+        }
+        .cred-said, .cred-happened { padding: 0.85rem 1rem; font-size: 0.85rem; background: var(--navy); }
+        .cred-said { color: var(--text-dim); }
+        .cred-happened { color: var(--text); }
+
+        .source-bar {
+            margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+            font-size: 0.8rem; color: var(--text-dim); font-style: italic;
+        }
+        .bottom-cta {
+            margin-top: 3rem; padding: 2.5rem; text-align: center;
+            background: linear-gradient(135deg, var(--navy-light), var(--slate));
+            border: 1px solid var(--border); border-radius: 12px;
+        }
+        .bottom-cta h3 { font-family: 'Newsreader', serif; font-size: 1.4rem; margin: 0 0 0.5rem; }
+        .bottom-cta p { color: var(--text-dim); margin-bottom: 1.25rem; font-size: 0.9rem; }
+        .bottom-cta a {
+            display: inline-block; padding: 0.75rem 2rem; background: var(--blue);
+            color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
+        }
+
+        @media (max-width: 640px) {
+            .article { padding: 6rem 1.25rem 3rem; }
+            .cred-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html" class="logo">Connected<span>.</span>Insights</a>
+    <a href="../index.html" class="back-link">&larr; All Briefs</a>
+</nav>
+
+<article class="article">
+
+    <div class="article-meta">
+        <span class="sector-badge">Two-Wheelers</span>
+        <span class="article-date">FY2025</span>
+        <span class="article-read">10 min read</span>
+    </div>
+
+    <h1>The EV bet that divides India's motorcycle kings</h1>
+    <p class="article-subtitle">3 annual reports. 3 radically different strategies. One question: how fast does the EV transition actually happen?</p>
+
+    <div class="company-bar">
+        <span class="company-chip">Bajaj Auto &middot; Rs 50,010 Cr revenue &middot; 20.2% EBITDA</span>
+        <span class="company-chip">Hero MotoCorp &middot; Rs 40,756 Cr revenue &middot; 14.4% EBITDA</span>
+        <span class="company-chip">Eicher Motors &middot; Rs 18,451 Cr revenue &middot; 25.8% EBITDA</span>
+    </div>
+
+    <!-- THE SETUP -->
+    <div class="section-marker"><span class="tag tag-setup">Context</span></div>
+    <h2>The Setup</h2>
+    <p>Indian two-wheelers grew 9.1% in FY2025 to 19.6 million units &mdash; still below the pre-pandemic peak. Motorcycles (12.3M units) grew a modest 5.1%, while electric 2Ws (1.2M units) surged 20&ndash;22% to reach 6.7% market share. Exports recovered strongly at 21%. Three companies, three radically different margin profiles &mdash; Eicher at 25.8%, Bajaj at 20.2%, Hero at 14.4% &mdash; and a single question that divides them.</p>
+
+    <!-- THE CONSENSUS -->
+    <div class="section-marker"><span class="tag tag-priced">Priced In</span></div>
+    <h2>The Consensus</h2>
+    <p>All three managements converge on these themes &mdash; meaning the market already knows:</p>
+
+    <ol>
+        <li><strong>India macro is supportive.</strong> 6.5% GDP, RBI rate cuts, Budget 2025 tax relief. Personal mobility demand grows with the economy. Table stakes.</li>
+        <li><strong>Rural demand is recovering.</strong> Rural outperformed urban in FY2025 (Hero). Good monsoon, better farm incomes. Expected.</li>
+        <li><strong>Premiumisation is secular.</strong> Rising incomes push buyers from 100cc to 125cc+ to 250cc+. All three investing in premium. Not new.</li>
+        <li><strong>Exports are back.</strong> Double-digit export growth after FY23-24 headwinds. LATAM, ASEAN, Africa. Recovery was anticipated.</li>
+        <li><strong>EV is inevitable.</strong> All three acknowledge the transition. But &mdash; and this is where consensus shatters &mdash; they disagree violently on timing and commitment.</li>
+    </ol>
+
+    <!-- THE DIVERGENCE -->
+    <div class="section-marker"><span class="tag tag-alpha">Alpha</span></div>
+    <h2>The Divergence</h2>
+    <p>Read these three annual reports together, and the strategic fault lines are stark. These companies are making fundamentally different bets on the future of mobility.</p>
+
+    <h3>1. The EV Conviction Spectrum</h3>
+    <p>This is the single most important strategic divergence in Indian auto right now:</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Dimension</th><th>Bajaj (All-In)</th><th>Hero (Hedging)</th><th>Eicher (Skeptical)</th></tr></thead>
+            <tbody>
+                <tr><td><strong>EV Revenue</strong></td><td>Rs 5,500 Cr (~20% domestic)</td><td>Small (VIDA, 200% growth, low base)</td><td>Zero (Flying Flea not in market)</td></tr>
+                <tr><td><strong>EV Product</strong></td><td>Chetak (#1 e-scooter) + GoGo (e-3W)</td><td>VIDA + Euler Motors stake + Zero partnership</td><td>Flying Flea (premium e-motorcycle, unveiled only)</td></tr>
+                <tr><td><strong>Tone in Annual Report</strong></td><td>"Turbocharged by rapid scale-up"</td><td>"Investing across platforms"</td><td>"Being circumspect about fully scaling"</td></tr>
+                <tr><td><strong>ICE Commitment</strong></td><td>Parallel &mdash; also launched CNG bike</td><td>Full &mdash; still 95%+ of revenue</td><td>Full &mdash; "could be a long time"</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout">
+        <strong>The signal:</strong> Bajaj has already built a Rs 5,500 Cr EV business &mdash; larger than many standalone EV companies. Eicher is the explicit contrarian, publicly stating the shift may take far longer than the market assumes. Who's right determines which stock compounds over the next 5 years.
+    </div>
+
+    <h3>2. The Margin Architecture Is Totally Different</h3>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Metric</th><th>Bajaj</th><th>Hero</th><th>Eicher</th></tr></thead>
+            <tbody>
+                <tr><td>EBITDA Margin</td><td>20.2%</td><td>14.4%</td><td><strong>25.8%</strong></td></tr>
+                <tr><td>Revenue/Unit (approx)</td><td>Rs 1.07L</td><td>Rs 0.69L</td><td><strong>Rs 1.85L</strong></td></tr>
+                <tr><td>Units Sold</td><td>46.5L</td><td><strong>59.0L</strong></td><td>10.0L</td></tr>
+                <tr><td>PAT</td><td><strong>Rs 8,151 Cr</strong></td><td>Rs 4,610 Cr</td><td>Rs 4,279 Cr</td></tr>
+                <tr><td>Surplus Cash</td><td>Rs 16,999 Cr</td><td>Rs 6,900 Cr</td><td>Rs 16,110 Cr</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Hero sells the most units (59L) but makes the least per unit. Eicher sells the fewest (10L) but makes the most per unit. Bajaj sits in the middle on volume but leads on total profit.</p>
+
+    <div class="callout">
+        <strong>The signal:</strong> Hero's 14.4% EBITDA margin is a structural vulnerability. Locked in the entry segment (100&ndash;110cc) where pricing power is lowest. If raw material costs spike, Hero's margin has the least buffer. Eicher at 25.8% has genuine pricing power &mdash; Royal Enfield buyers are brand-loyal, not price-shopping.
+    </div>
+
+    <h3>3. International Strategy: Three Different Playbooks</h3>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Dimension</th><th>Bajaj</th><th>Hero</th><th>Eicher</th></tr></thead>
+            <tbody>
+                <tr><td>Export Share</td><td><strong>33.7%</strong></td><td>4.9%</td><td>~10%</td></tr>
+                <tr><td>Countries</td><td>100+</td><td>48</td><td>60+</td></tr>
+                <tr><td>Big Bet</td><td>KTM parent acquisition (&euro;800M)</td><td>Entering Europe with EVs</td><td>CKD assembly (Thailand, Brazil, etc.)</td></tr>
+                <tr><td>Key Risk</td><td>KTM restructuring &mdash; Rs 915 Cr loss booked</td><td>Tiny base, unproven in developed markets</td><td>Concentrated in mid-price globally</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>Bajaj's KTM acquisition is the highest-stakes bet in the sector. The &euro;800M debt package to acquire the parent of a restructuring European motorcycle brand is either a masterstroke (global premium access at distressed prices) or a value trap (Rs 915 Cr loss already booked). No other Indian 2W company is making a bet this large or this binary.</p>
+
+    <h3>4. Leadership Stability</h3>
+    <p>Both Bajaj and Hero had disruptions in FY2025:</p>
+    <ul>
+        <li><strong>Hero:</strong> CEO Niranjan Gupta departed. Operating under an "Acting CEO" arrangement. For the world's largest 2W manufacturer, this is non-trivial.</li>
+        <li><strong>Bajaj:</strong> No CEO disruption, but KTM restructuring adds board-level complexity.</li>
+        <li><strong>Eicher:</strong> Stable leadership. Siddhartha Lal continues as MD. Most continuity among the three.</li>
+    </ul>
+
+    <!-- THE CREDIBILITY CHECK -->
+    <div class="section-marker"><span class="tag tag-trust">Accountability</span></div>
+    <h2>The Credibility Check</h2>
+
+    <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 1.5rem 0;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; background: rgba(255,255,255,0.04); padding: 0.65rem 1rem; border-bottom: 1px solid var(--border);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 600;">What Was Said (FY2024 reports)</span>
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 600;">What Actually Happened</span>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"2W industry recovery underway"</div>
+            <div class="cred-happened">Partially true &mdash; 9.1% growth but still below pre-pandemic peak</div>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"EV is accelerating"</div>
+            <div class="cred-happened"><strong style="color: var(--green);">True</strong> &mdash; 20-22% growth, Bajaj scaled Chetak meaningfully</div>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"Export recovery expected"</div>
+            <div class="cred-happened"><strong style="color: var(--green);">True</strong> &mdash; 21% growth, strongest in three years</div>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"Premiumisation driving mix improvement"</div>
+            <div class="cred-happened">Mixed &mdash; Bajaj lost motorcycle share (18.2% &rarr; 16.6%)</div>
+        </div>
+    </div>
+    <div class="callout">
+        <strong>Takeaway:</strong> Bajaj's domestic motorcycle share loss (18.2% &rarr; 16.6%) while claiming premiumisation is a red flag worth watching. Are they losing the core to fund the EV bet?
+    </div>
+
+    <!-- THE SIGNAL -->
+    <div class="section-marker"><span class="tag tag-signal">The Edge</span></div>
+    <h2>The Signal</h2>
+    <p>5 things only visible when you read all 3 annual reports together:</p>
+
+    <div class="signal-item">
+        <h4>1. Bajaj is becoming an EV company faster than the market realizes</h4>
+        <p>Rs 5,500 Cr in EV revenue, 20% of domestic sales, #1 e-scooter, #1 e-3W. Add captive financing (BACL at Rs 9,300 Cr AUM in year one) and the CNG bike (Freedom &mdash; world's first). Bajaj is building optionality across every powertrain. The risk: spreading too thin. Motorcycle market share dropped from 18.2% to 16.6% while chasing new frontiers.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>2. Eicher is making the contrarian ICE bet &mdash; and the math supports it</h4>
+        <p>At 25.8% EBITDA and 87% midsize share, Royal Enfield's ICE business generates Rs 4,279 Cr PAT on just 10 lakh units. Flying Flea is insurance, not strategy. Eicher is explicitly saying: "The EV transition in motorcycles will take longer than scooters." If they're right, they're the most capital-efficient franchise in Indian auto. If wrong, they're the Kodak of 2Ws.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>3. Hero's margin problem is existential, not cyclical</h4>
+        <p>14.4% EBITDA on 59 lakh units &mdash; the lowest margin on the highest volume. The entry segment (100&ndash;110cc) is commoditizing. Hero's premiumisation push puts it directly against Bajaj and Eicher in segments where they're established. The CEO departure mid-year adds execution risk. Hero needs to prove it can move upmarket and maintain volume simultaneously &mdash; the hardest trick in the business.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>4. Balance sheets are uniformly fortress-strong</h4>
+        <p>All three companies are debt-free with Rs 7,000&ndash;17,000 Cr in surplus cash. This means every company can self-fund its EV transition, international expansion, and M&A without dilution. The capital allocation decisions &mdash; not the availability of capital &mdash; will determine the winners.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>5. Captive financing is the emerging competitive lever</h4>
+        <p>Bajaj launched BACL and hit Rs 9,300 Cr AUM in year one. Hero has 65% finance penetration. Eicher at 61%. In rural/semi-urban India, access to credit determines purchase decisions. The company that controls the financing stack controls the customer. Bajaj building its own NBFC while Hero relies on third-party financiers is a structural advantage that compounds over time.</p>
+    </div>
+
+    <!-- SOURCE -->
+    <div class="source-bar">
+        Built from FY2025 Annual Reports of Bajaj Auto, Hero MotoCorp, and Eicher Motors. Every claim grounded in specific company disclosures. No external data. No recommendations.
+    </div>
+
+    <!-- CTA -->
+    <div class="bottom-cta">
+        <h3>Want the next sector brief?</h3>
+        <p>We cover 16 sectors across Indian markets. Subscribe to get every brief as it drops.</p>
+        <a href="../index.html#subscribe">Subscribe Free &rarr;</a>
+    </div>
+
+</article>
+
+</body>
+</html>

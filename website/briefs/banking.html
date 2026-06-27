@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Sector Brief | FY2025 | Connected Insights</title>
+    <meta name="description" content="6 bank annual reports synthesized. HDFC Bank's CASA crisis, SBI's silent transformation, and the deposit war nobody's talking about.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-light: #132038;
+            --slate: #1e3054;
+            --blue: #3b82f6;
+            --gold: #f59e0b;
+            --gold-dim: rgba(245, 158, 11, 0.15);
+            --green: #4ade80;
+            --green-dim: rgba(34, 197, 94, 0.15);
+            --red: #f87171;
+            --red-dim: rgba(239, 68, 68, 0.15);
+            --purple: #c084fc;
+            --purple-dim: rgba(168, 85, 247, 0.15);
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-bright: #f8fafc;
+            --border: rgba(255,255,255,0.08);
+            --card-bg: rgba(255,255,255,0.03);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 22, 40, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            font-family: 'Newsreader', serif;
+            font-size: 1.25rem; font-weight: 600;
+            color: var(--text-bright); text-decoration: none;
+        }
+        .logo span { color: var(--gold); }
+        .back-link {
+            color: var(--text-dim); text-decoration: none; font-size: 0.85rem;
+        }
+        .back-link:hover { color: var(--text); }
+
+        /* ARTICLE */
+        .article {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 7rem 2rem 4rem;
+        }
+        .article-meta {
+            display: flex; gap: 1.5rem; align-items: center;
+            margin-bottom: 2rem; flex-wrap: wrap;
+        }
+        .sector-badge {
+            padding: 0.3rem 0.8rem;
+            background: var(--gold-dim);
+            color: var(--gold);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 4px;
+        }
+        .article-date { font-size: 0.85rem; color: var(--text-dim); }
+        .article-read { font-size: 0.85rem; color: var(--text-dim); }
+
+        h1 {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+        .article-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        .company-bar {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            padding: 1.25rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+        .company-chip {
+            padding: 0.35rem 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        /* SECTIONS */
+        .section-marker {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            margin-top: 3rem; margin-bottom: 1rem;
+        }
+        .section-marker .tag {
+            display: inline-block;
+            padding: 0.25rem 0.65rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 4px;
+        }
+        .tag-setup { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+        .tag-priced { background: var(--red-dim); color: var(--red); }
+        .tag-alpha { background: var(--green-dim); color: var(--green); }
+        .tag-trust { background: var(--purple-dim); color: var(--purple); }
+        .tag-signal { background: var(--gold-dim); color: var(--gold); }
+
+        h2 {
+            font-family: 'Newsreader', serif;
+            font-size: 1.6rem;
+            color: var(--text-bright);
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+        h3 {
+            font-size: 1.05rem;
+            color: var(--text-bright);
+            margin: 2rem 0 0.75rem;
+            font-weight: 600;
+        }
+        p { margin-bottom: 1rem; font-size: 0.95rem; }
+        strong { color: var(--text-bright); }
+
+        /* TABLES */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            background: rgba(255,255,255,0.04);
+            color: var(--text-dim);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(255,255,255,0.02); }
+
+        /* CALLOUT */
+        .callout {
+            padding: 1.25rem 1.5rem;
+            border-left: 3px solid var(--gold);
+            background: var(--gold-dim);
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .callout strong { color: var(--gold); }
+
+        /* SIGNAL BOX */
+        .signal-item {
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--card-bg);
+            margin-bottom: 1.25rem;
+        }
+        .signal-item h4 {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .signal-item p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 0;
+            line-height: 1.65;
+        }
+
+        /* ORDERED LIST */
+        ol {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        ol li {
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        /* CREDIBILITY TABLE */
+        .cred-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1px;
+        }
+        .cred-said, .cred-happened {
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+            background: var(--navy);
+        }
+        .cred-said { color: var(--text-dim); }
+        .cred-happened { color: var(--text); }
+
+        /* SOURCE */
+        .source-bar {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* CTA */
+        .bottom-cta {
+            margin-top: 3rem;
+            padding: 2.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--navy-light), var(--slate));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        .bottom-cta h3 {
+            font-family: 'Newsreader', serif;
+            font-size: 1.4rem;
+            margin: 0 0 0.5rem;
+        }
+        .bottom-cta p { color: var(--text-dim); margin-bottom: 1.25rem; font-size: 0.9rem; }
+        .bottom-cta a {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: var(--blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 640px) {
+            .article { padding: 6rem 1.25rem 3rem; }
+            .cred-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="../index.html" class="logo">Connected<span>.</span>Insights</a>
+    <a href="../index.html" class="back-link">&larr; All Briefs</a>
+</nav>
+
+<article class="article">
+
+    <div class="article-meta">
+        <span class="sector-badge">Banking</span>
+        <span class="article-date">FY2025</span>
+        <span class="article-read">12 min read</span>
+    </div>
+
+    <h1>6 bank annual reports. 1 synthesis. What the market isn't reading between the lines.</h1>
+    <p class="article-subtitle">HDFC Bank, ICICI Bank, Kotak Mahindra Bank, Axis Bank, IndusInd Bank, State Bank of India</p>
+
+    <div class="company-bar">
+        <span class="company-chip">HDFC Bank &middot; Rs 39.1L Cr assets</span>
+        <span class="company-chip">ICICI Bank &middot; Rs 21.2L Cr assets</span>
+        <span class="company-chip">SBI &middot; Rs 66.8L Cr assets</span>
+        <span class="company-chip">Axis Bank &middot; Rs 16.1L Cr assets</span>
+        <span class="company-chip">Kotak Bank &middot; Rs 6.9L Cr assets</span>
+        <span class="company-chip">IndusInd Bank &middot; Rs 5.5L Cr assets</span>
+    </div>
+
+    <!-- THE SETUP -->
+    <div class="section-marker"><span class="tag tag-setup">Context</span></div>
+    <h2>The Setup</h2>
+    <p>Indian banking in FY2025: credit growth slowed to 10.9% (from 16.3%), RBI cut repo rate by 100 bps to 5.50%, and system-level gross NPAs hit a 14-year low of 2.4%. On the surface, a healthy sector in a rate-easing cycle. Beneath it &mdash; a deposit war, a governance crisis, and a widening gap between the best and worst performers.</p>
+
+    <!-- THE CONSENSUS -->
+    <div class="section-marker"><span class="tag tag-priced">Priced In</span></div>
+    <h2>The Consensus</h2>
+    <p>All six banks agree on these themes &mdash; which means the market already knows:</p>
+
+    <ol>
+        <li><strong>India GDP at 6&ndash;6.5% in FY2026.</strong> Every single annual report opens with this. It's table stakes, not insight.</li>
+        <li><strong>Rate cuts will revive credit demand.</strong> 100 bps cut so far, accommodative stance. Banks expect lower EMIs to unlock retail borrowing. Consensus is unanimous &mdash; and therefore already in the stock price.</li>
+        <li><strong>Asset quality is at multi-year best.</strong> System GNPA at 2.4%. Every bank (except IndusInd) reported improving slippages. The "NPA cleanup is done" narrative is fully baked in.</li>
+        <li><strong>Digital is non-negotiable.</strong> HDFC processes 97% of transactions digitally, SBI's alternate channels at 98.2%, Axis owns 33.3% UPI payer market share. Every bank claims digital leadership. None has a decisive moat yet.</li>
+        <li><strong>Rural expansion is the next frontier.</strong> Branches, BCs, digital onboarding in Tier 3&ndash;6 towns. All five banks (ex-IndusInd) are racing into rural/semi-urban markets.</li>
+    </ol>
+
+    <!-- THE DIVERGENCE -->
+    <div class="section-marker"><span class="tag tag-alpha">Alpha</span></div>
+    <h2>The Divergence</h2>
+    <p>This is where it gets interesting. Read these annual reports side by side, and five fault lines emerge:</p>
+
+    <h3>1. The CASA Crisis Isn't Equal</h3>
+    <p>CASA ratios are declining across the board &mdash; but the starting points are wildly different:</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Bank</th><th>CASA</th><th>Direction</th><th>Why It Matters</th></tr></thead>
+            <tbody>
+                <tr><td>Kotak</td><td>43%</td><td>Down from 60%+</td><td>Still the best, but the premium is eroding</td></tr>
+                <tr><td>ICICI</td><td>41%</td><td>Stable</td><td>Best-positioned among large banks</td></tr>
+                <tr><td>Axis</td><td>41%</td><td>Under pressure</td><td>Citi integration brought premium deposits</td></tr>
+                <tr><td>SBI</td><td>40%</td><td>Structural floor</td><td>Govt salary accounts &mdash; hard to dislodge</td></tr>
+                <tr><td><strong>HDFC Bank</strong></td><td><strong>34.8%</strong></td><td><strong>Lowest</strong></td><td>Merger legacy &mdash; Rs 2.88L Cr HDFC Ltd borrowings</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="callout">
+        <strong>The signal:</strong> HDFC Bank's NIM recovery story is entirely a CASA recovery story. They're running a deposit substitution play &mdash; growing deposits 14.1% while restraining advances to 5.4%. If CASA doesn't climb back above 38&ndash;40% by FY2027, the "merger synergies" narrative breaks.
+    </div>
+
+    <h3>2. Profitability Dispersion Is the Widest in Years</h3>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Metric</th><th>Best</th><th>Worst</th><th>Spread</th></tr></thead>
+            <tbody>
+                <tr><td>ROA</td><td>Kotak 2.7%</td><td>IndusInd 0.5%</td><td><strong>5.4x</strong></td></tr>
+                <tr><td>ROE</td><td>SBI 19.87%</td><td>IndusInd 4.17%</td><td><strong>4.8x</strong></td></tr>
+                <tr><td>PAT Growth</td><td>SBI +17.9%</td><td>IndusInd -70%</td><td>N/A</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>The gap between the best and worst ROA in a single peer set is 5.4x. The driver? Unsecured retail and microfinance &mdash; banks that went heavy into personal loans and MFI got punished. Banks that stayed selective (Kotak, ICICI) came out clean.</p>
+
+    <h3>3. HDFC Bank Is Playing a Different Game</h3>
+    <p>Post-merger HDFC Bank (Rs 39.1L Cr assets) is now larger than ICICI + Axis combined. But the numbers tell a restraint story:</p>
+    <ul style="padding-left: 1.25rem; margin-bottom: 1rem;">
+        <li>Advances grew only <strong>5.4%</strong> &mdash; deliberately throttled</li>
+        <li>Deposits grew <strong>14.1%</strong> &mdash; absorbing HDFC Ltd's maturing borrowings</li>
+        <li>NIM at <strong>3.48%</strong> &mdash; second-lowest among private peers</li>
+        <li>Mortgage book at <strong>Rs 8.36L Cr</strong> &mdash; largest in India, structurally low-NIM</li>
+    </ul>
+    <div class="callout">
+        <strong>The signal:</strong> ~15% of HDFC Ltd borrowings (Rs 43,000 Cr) mature each year in FY26/FY27. As these roll off and get replaced by deposits, NIM should expand. The question is whether the market is patient enough to wait.
+    </div>
+
+    <h3>4. IndusInd's Governance Blow-Up Is a Warning</h3>
+    <p>IndusInd Bank's FY2025: derivative accounting discrepancy (2.35% of net worth), GNPA jumping from 1.92% to 3.13%, CEO resignation, RBI-appointed committee overseeing operations. PAT collapsed from Rs 8,950 Cr to Rs 2,643 Cr.</p>
+    <p>But here's the pattern: Kotak <em>also</em> faced an RBI embargo on digital onboarding in FY2025. Two of six banks in this peer set faced material regulatory action in the same year. That's not a one-off. The regulatory bar is rising, and governance risk is being re-priced.</p>
+
+    <h3>5. SBI's Transformation Is Structural</h3>
+    <p>SBI's ROA journey: <strong>-0.19% (FY2018) &rarr; 1.10% (FY2025)</strong>. Operating profit crossed Rs 1 lakh crore for the first time.</p>
+    <p>The most underappreciated metric: <strong>domestic CD ratio at 69.71%</strong>. Every private bank is at 85&ndash;95%. SBI has 15&ndash;25 percentage points of headroom to grow credit without needing incremental deposits at the same rate. At the largest balance sheet in the country, that's an enormous lever.</p>
+
+    <!-- THE CREDIBILITY CHECK -->
+    <div class="section-marker"><span class="tag tag-trust">Accountability</span></div>
+    <h2>The Credibility Check</h2>
+    <p>What banks said last year vs. what happened:</p>
+
+    <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 1.5rem 0;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; background: rgba(255,255,255,0.04); padding: 0.65rem 1rem; border-bottom: 1px solid var(--border);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 600;">What Was Said (FY2024 reports)</span>
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); font-weight: 600;">What Actually Happened</span>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"Credit growth will sustain at 14&ndash;16%"</div>
+            <div class="cred-happened">Slowed to 10.9%. <strong style="color: var(--red);">Overpromised.</strong></div>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"Asset quality is resilient"</div>
+            <div class="cred-happened">True for most &mdash; but unsecured retail blew up for IndusInd</div>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"Digital transformation is a priority"</div>
+            <div class="cred-happened">True &mdash; but no competitive separation emerged</div>
+        </div>
+        <div class="cred-row">
+            <div class="cred-said">"HDFC merger integration on track"</div>
+            <div class="cred-happened">Largely true &mdash; deposit growth ahead of plan, CASA still lagging</div>
+        </div>
+    </div>
+    <div class="callout">
+        <strong>Takeaway:</strong> Banking managements tend to be directionally right on macro, but systematically overestimate their own growth rates.
+    </div>
+
+    <!-- THE SIGNAL -->
+    <div class="section-marker"><span class="tag tag-signal">The Edge</span></div>
+    <h2>The Signal</h2>
+    <p>5 things only visible when you read all 6 annual reports together:</p>
+
+    <div class="signal-item">
+        <h4>1. The deposit war is the real story, not credit growth</h4>
+        <p>Every bank talked about credit demand. But read the balance sheets &mdash; deposits are the constraint. HDFC Bank is deliberately suppressing credit growth to fix its deposit mix. Axis is leveraging Citi's premium deposit base. SBI's low CD ratio is a structural advantage no private bank can replicate. Whoever wins the deposit battle wins the cycle.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>2. Unsecured retail was the great separator</h4>
+        <p>Banks that went aggressive on personal loans and microfinance (IndusInd) got hit. Banks that stayed disciplined (ICICI's "fair to customer, fair to bank" philosophy, Kotak's selective underwriting) emerged stronger. This is a management quality signal, not a macro signal.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>3. Gold loans are the stealth growth story</h4>
+        <p>HDFC Bank grew gold loans 28%, SBI grew 53%. Three banks highlighted it as a strategic priority. The shift from unorganized gold lending to banks is early-innings and high-margin. This segment is flying under the radar.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>4. The "merger premium" for HDFC Bank is being tested</h4>
+        <p>The market priced in synergies at acquisition. But FY2025 shows the cost &mdash; lowest CASA, compressed NIM, subdued advance growth. The thesis requires patience through FY27. If HDFC Ltd borrowing runoff proceeds as planned, this is the best risk-reward setup in large-cap banking. If it doesn't, the derating has further to go.</p>
+    </div>
+
+    <div class="signal-item">
+        <h4>5. PSU vs. private bank convergence is real</h4>
+        <p>SBI at 19.87% ROE now exceeds ICICI (16.52%), Axis (16.52%), and Kotak (15.2%). The "PSU banks are structurally inferior" narrative needs updating. SBI is compounding at scale with a deposit franchise that private banks envy.</p>
+    </div>
+
+    <!-- SOURCE -->
+    <div class="source-bar">
+        Built from FY2025 Annual Reports of HDFC Bank, ICICI Bank, Kotak Mahindra Bank, Axis Bank, IndusInd Bank, and SBI. Every claim grounded in specific company disclosures. No external data. No recommendations.
+    </div>
+
+    <!-- CTA -->
+    <div class="bottom-cta">
+        <h3>Want the next sector brief?</h3>
+        <p>We cover 16 sectors across Indian markets. Subscribe to get every brief as it drops.</p>
+        <a href="../index.html#subscribe">Subscribe Free &rarr;</a>
+    </div>
+
+</article>
+
+</body>
+</html>

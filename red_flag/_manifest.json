@@ -1,0 +1,158 @@
+{
+  "AHCL_AR_FY2023.pdf": {
+    "status": "done",
+    "output": "AHCL_MDA_FY2023_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "AHCL_AR_FY2024.pdf": {
+    "status": "done",
+    "output": "AHCL_MDA_FY2024_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "AHCL_AR_FY2025.pdf": {
+    "status": "done",
+    "output": "AHCL_MDA_FY2025_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BAJAJ-AUTO_AnnualReport_FY2021.pdf": {
+    "status": "done",
+    "output": "BAJAJ-AUTO_MDA_FY2021_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BAJAJ-AUTO_AnnualReport_FY2022.pdf": {
+    "status": "done",
+    "output": "BAJAJ-AUTO_MDA_FY2022_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BAJAJ-AUTO_AnnualReport_FY2023.pdf": {
+    "status": "done",
+    "output": "BAJAJ-AUTO_MDA_FY2023_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BAJAJ-AUTO_AnnualReport_FY2024.pdf": {
+    "status": "done",
+    "output": "BAJAJ-AUTO_MDA_FY2024_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BAJAJ-AUTO_AnnualReport_FY2026.pdf": {
+    "status": "done",
+    "output": "BAJAJ-AUTO_MDA_FY2026_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AnnualReport_FY2021.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2021_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AnnualReport_FY2023.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2023_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AnnualReport_FY2024.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2024_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AnnualReport_FY2025.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2025_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AR_FY2021.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2021_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AR_FY2023.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2023_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AR_FY2024.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2024_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "BLS_AR_FY2025.pdf": {
+    "status": "done",
+    "output": "BLS_MDA_FY2025_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AnnualReport_FY2021.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2021_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AnnualReport_FY2022.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2022_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AnnualReport_FY2023.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2023_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AnnualReport_FY2024.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2024_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AnnualReport_FY2025.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2025_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AR_FY2021.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2021_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AR_FY2022.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2022_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AR_FY2023.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2023_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AR_FY2024.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2024_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  },
+  "CAMS_AR_FY2025.pdf": {
+    "status": "done",
+    "output": "CAMS_MDA_FY2025_context.md",
+    "note": "output existed, added to manifest retroactively",
+    "processed_at": "2026-06-13"
+  }
+}

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Insights | Sector Intelligence from Annual Reports</title>
+    <meta name="description" content="We read every annual report in the sector so you don't have to. Cross-company synthesis that reveals what individual analysis misses.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-light: #132038;
+            --slate: #1e3054;
+            --blue: #3b82f6;
+            --blue-dim: #2563eb;
+            --gold: #f59e0b;
+            --gold-dim: rgba(245, 158, 11, 0.15);
+            --text: #e2e8f0;
+            --text-dim: #94a3b8;
+            --text-bright: #f8fafc;
+            --border: rgba(255,255,255,0.08);
+            --card-bg: rgba(255,255,255,0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            font-family: 'Newsreader', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+        .logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--text-bright); }
+        .nav-cta {
+            background: var(--blue) !important;
+            color: white !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--blue-dim) !important; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--gold);
+            background: var(--gold-dim);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        .hero h1 {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            max-width: 800px;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { background: var(--blue-dim); transform: translateY(-1px); }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--text-dim); background: var(--card-bg); }
+
+        /* PROOF BAR */
+        .proof-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .proof-item {
+            text-align: center;
+        }
+        .proof-number {
+            font-family: 'Newsreader', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1;
+        }
+        .proof-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 0.35rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* SECTIONS */
+        section { padding: 6rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-family: 'Newsreader', serif;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            max-width: 650px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        /* HOW IT WORKS */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .step {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--card-bg);
+            transition: border-color 0.3s;
+        }
+        .step:hover { border-color: rgba(255,255,255,0.15); }
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 8px;
+            background: var(--gold-dim);
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+        .step h3 {
+            font-size: 1.1rem;
+            color: var(--text-bright);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.65;
+        }
+
+        /* WHAT YOU GET */
+        .format-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .format-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--card-bg);
+        }
+        .format-card h3 {
+            font-size: 1rem;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .format-card .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        .tag-priced { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .tag-alpha { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+        .tag-trust { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .tag-signal { background: var(--gold-dim); color: var(--gold); }
+        .tag-free { background: rgba(59, 130, 246, 0.15); color: var(--blue); }
+        .format-card p {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* SAMPLE BRIEFS */
+        .briefs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .brief-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--card-bg);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .brief-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .brief-header {
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .brief-sector {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .brief-header h3 {
+            font-family: 'Newsreader', serif;
+            font-size: 1.35rem;
+            color: var(--text-bright);
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+        .brief-header p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .brief-meta {
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brief-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .brief-stat {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+        .brief-stat strong {
+            color: var(--text);
+        }
+        .brief-read {
+            font-size: 0.85rem;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        /* PRICING */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .price-card {
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--card-bg);
+            position: relative;
+        }
+        .price-card.featured {
+            border-color: var(--blue);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), transparent);
+        }
+        .price-card.featured::after {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -0.7rem;
+            left: 2rem;
+            background: var(--blue);
+            color: white;
+            padding: 0.2rem 0.75rem;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+        .price-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+        .price-amount {
+            font-family: 'Newsreader', serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+        .price-amount span {
+            font-size: 1rem;
+            color: var(--text-dim);
+            font-family: 'Inter', sans-serif;
+        }
+        .price-period {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        .price-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        .price-features li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .price-features li::before {
+            content: '\2713';
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .price-btn {
+            display: block;
+            width: 100%;
+            padding: 0.85rem;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .price-btn-primary {
+            background: var(--blue);
+            color: white;
+            border: none;
+        }
+        .price-btn-primary:hover { background: var(--blue-dim); }
+        .price-btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .price-btn-secondary:hover { border-color: var(--text-dim); }
+
+        /* NEWSLETTER SIGNUP */
+        .signup-section {
+            background: linear-gradient(135deg, var(--navy-light), var(--slate));
+            border-radius: 16px;
+            padding: 4rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .signup-section h2 {
+            font-family: 'Newsreader', serif;
+            font-size: 2rem;
+            color: var(--text-bright);
+            margin-bottom: 0.75rem;
+        }
+        .signup-section p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        .signup-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .signup-form input {
+            flex: 1;
+            padding: 0.85rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: var(--text-bright);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .signup-form input:focus { border-color: var(--blue); }
+        .signup-form input::placeholder { color: var(--text-dim); }
+        .signup-form button {
+            padding: 0.85rem 1.75rem;
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .signup-form button:hover { filter: brightness(1.1); }
+        .signup-note {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-top: 1rem;
+        }
+        .signup-success {
+            display: none;
+            padding: 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            color: #4ade80;
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Newsreader', serif;
+            font-size: 1.15rem;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+        .footer-logo span { color: var(--gold); }
+        footer p {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .footer-links a {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .footer-links a:hover { color: var(--text); }
+        .footer-disclaimer {
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            font-size: 0.72rem;
+            color: rgba(148, 163, 184, 0.6);
+            line-height: 1.5;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 7rem 1.5rem 3rem; }
+            .proof-bar { gap: 2rem; }
+            .format-grid, .briefs-grid { grid-template-columns: 1fr; }
+            .signup-section { padding: 2.5rem 1.5rem; }
+            .signup-form { flex-direction: column; }
+            section { padding: 4rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="/" class="logo">Connected<span>.</span>Insights</a>
+    <div class="nav-links">
+        <a href="#how">How It Works</a>
+        <a href="#briefs">Sample Briefs</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#subscribe" class="nav-cta">Subscribe</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-badge">FY2025 Annual Report Season</div>
+    <h1>We read every annual report in the sector.<br><em>You get the signal.</em></h1>
+    <p class="hero-sub">Cross-company intelligence briefs that reveal what individual analysis misses. Built from primary sources. Grounded in verbatim management commentary. Zero speculation.</p>
+    <div class="hero-cta-group">
+        <a href="#subscribe" class="btn-primary">Get the Free Brief</a>
+        <a href="#briefs" class="btn-secondary">Read a Sample</a>
+    </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+    <div class="proof-item">
+        <div class="proof-number">50+</div>
+        <div class="proof-label">Annual Reports Read</div>
+    </div>
+    <div class="proof-item">
+        <div class="proof-number">16</div>
+        <div class="proof-label">Sectors Covered</div>
+    </div>
+    <div class="proof-item">
+        <div class="proof-number">5</div>
+        <div class="proof-label">Sections Per Brief</div>
+    </div>
+    <div class="proof-item">
+        <div class="proof-number">0</div>
+        <div class="proof-label">External Data Used</div>
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+    <div class="container">
+        <div class="section-label">The Process</div>
+        <h2 class="section-title">What makes this different</h2>
+        <p class="section-desc">Most analysis covers one company at a time. We read every major player in a sector simultaneously and synthesize what the group of companies reveals together.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Read Every Report</h3>
+                <p>We go through the full annual report &mdash; MD&A, Chairman's letter, Directors' report, risk factors &mdash; for every major company in the sector. Not screener data. Primary sources.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Separate Signal from Noise</h3>
+                <p>Every sector brief separates what all managements agree on (priced in by the market) from where they diverge (where the alpha lives). Consensus is context. Divergence is insight.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Ground Every Claim</h3>
+                <p>No generic commentary, no "industry experts believe." Every statement traces to a specific company's disclosure. If we can't source it to an annual report, it doesn't make the brief.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h3>Deliver the Cross-Read</h3>
+                <p>The final section surfaces insights visible only when you read all companies together &mdash; the patterns, tensions, and strategic bets that individual analysis cannot reveal.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT EACH BRIEF CONTAINS -->
+<section style="border-top: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Anatomy of a Brief</div>
+        <h2 class="section-title">Five sections. One investment edge.</h2>
+        <p class="section-desc">Each sector brief follows a consistent framework designed for investors who want depth without noise.</p>
+
+        <div class="format-grid">
+            <div class="format-card">
+                <div class="tag tag-free">Context</div>
+                <h3>The Setup</h3>
+                <p>Three lines of sector macro context. GDP, volumes, policy shifts &mdash; only what the companies themselves cite. Sets the stage without burying you in data.</p>
+            </div>
+            <div class="format-card">
+                <div class="tag tag-priced">Priced In</div>
+                <h3>The Consensus</h3>
+                <p>Themes where all managements agree. If every CEO says the same thing, the market already knows. This is what's in the price &mdash; useful for context, not for edge.</p>
+            </div>
+            <div class="format-card">
+                <div class="tag tag-alpha">Alpha</div>
+                <h3>The Divergence</h3>
+                <p>Where companies disagree &mdash; on strategy, risk appetite, market positioning, capital allocation. This is the most valuable section. Divergence reveals where the investment alpha lives.</p>
+            </div>
+            <div class="format-card">
+                <div class="tag tag-trust">Accountability</div>
+                <h3>The Credibility Check</h3>
+                <p>What managements said last year vs. what actually happened. Track record matters. We hold annual reports accountable so you know whose forward guidance to trust.</p>
+            </div>
+            <div class="format-card" style="grid-column: 1 / -1;">
+                <div class="tag tag-signal">The Edge</div>
+                <h3>The Signal</h3>
+                <p>5 non-obvious insights that emerge only from reading all companies in a sector together. These are cross-cutting themes invisible to single-company analysis &mdash; the reason this product exists. Patterns, tensions, and strategic fault lines that tell you where the sector is actually heading.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SAMPLE BRIEFS -->
+<section id="briefs" style="border-top: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Sample Briefs</div>
+        <h2 class="section-title">Read before you subscribe</h2>
+        <p class="section-desc">Full briefs, no paywall. Judge the depth for yourself.</p>
+
+        <div class="briefs-grid">
+            <a href="briefs/banking.html" class="brief-card">
+                <div class="brief-header">
+                    <div class="brief-sector">Banking | FY2025</div>
+                    <h3>The deposit war nobody's talking about</h3>
+                    <p>HDFC Bank's CASA at 34.8% is the lowest among peers. SBI's ROE now exceeds every private bank. Gold loans grew 28-53% in silence. Six annual reports reveal a sector in quiet transformation.</p>
+                </div>
+                <div class="brief-meta">
+                    <div class="brief-stats">
+                        <span class="brief-stat"><strong>6</strong> companies</span>
+                        <span class="brief-stat"><strong>12 min</strong> read</span>
+                    </div>
+                    <span class="brief-read">Read brief &rarr;</span>
+                </div>
+            </a>
+
+            <a href="briefs/auto-2wheeler.html" class="brief-card">
+                <div class="brief-header">
+                    <div class="brief-sector">Two-Wheelers | FY2025</div>
+                    <h3>The EV bet that divides India's motorcycle kings</h3>
+                    <p>Bajaj has Rs 5,500 Cr in EV revenue. Eicher says "it could be a long time." Hero has the most units, worst margins, and no CEO. Three strategies, one sector, zero consensus on the future.</p>
+                </div>
+                <div class="brief-meta">
+                    <div class="brief-stats">
+                        <span class="brief-stat"><strong>3</strong> companies</span>
+                        <span class="brief-stat"><strong>10 min</strong> read</span>
+                    </div>
+                    <span class="brief-read">Read brief &rarr;</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- SECTORS COVERED -->
+<section style="border-top: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Coverage Universe</div>
+        <h2 class="section-title">16 sectors. 50+ companies. Every annual report season.</h2>
+        <p class="section-desc">Nifty 50 and beyond &mdash; every major listed company across Indian markets.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; max-width: 800px;">
+            <span class="sector-tag">Banking</span>
+            <span class="sector-tag">FMCG</span>
+            <span class="sector-tag">IT Services</span>
+            <span class="sector-tag">Pharma</span>
+            <span class="sector-tag">Auto &mdash; Passenger Vehicles</span>
+            <span class="sector-tag">Auto &mdash; Two-Wheelers</span>
+            <span class="sector-tag">Cement</span>
+            <span class="sector-tag">Steel</span>
+            <span class="sector-tag">Oil &amp; Gas</span>
+            <span class="sector-tag">NBFC &amp; Financial Services</span>
+            <span class="sector-tag">Infrastructure &amp; Engineering</span>
+            <span class="sector-tag">Electrical Equipment</span>
+            <span class="sector-tag">Life Insurance</span>
+            <span class="sector-tag">Hospitals &amp; Healthcare</span>
+            <span class="sector-tag">Paints</span>
+            <span class="sector-tag">Power &amp; Utilities</span>
+        </div>
+        <style>
+            .sector-tag {
+                display: inline-block;
+                padding: 0.45rem 1rem;
+                font-size: 0.82rem;
+                color: var(--text-dim);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                background: var(--card-bg);
+            }
+        </style>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="border-top: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title">Invest in better information</h2>
+        <p class="section-desc">Annual report season runs May&ndash;July. Our briefs ship within days of filings.</p>
+
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-name">Free</div>
+                <div class="price-amount">&#8377;0</div>
+                <div class="price-period">forever</div>
+                <ul class="price-features">
+                    <li>2 sector briefs per quarter</li>
+                    <li>Setup + Consensus sections only</li>
+                    <li>Email delivery</li>
+                    <li>48-hour delay after paid subscribers</li>
+                </ul>
+                <a href="#subscribe" class="price-btn price-btn-secondary">Start Free</a>
+            </div>
+
+            <div class="price-card featured">
+                <div class="price-name">Professional</div>
+                <div class="price-amount">&#8377;999<span>/mo</span></div>
+                <div class="price-period">billed annually at &#8377;9,999</div>
+                <ul class="price-features">
+                    <li>All 16 sector briefs</li>
+                    <li>Full brief: Divergence + Credibility + Signal</li>
+                    <li>Same-day delivery on filing</li>
+                    <li>Quarterly sector updates</li>
+                    <li>Searchable archive of all briefs</li>
+                </ul>
+                <a href="#subscribe" class="price-btn price-btn-primary">Subscribe</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-name">Institutional</div>
+                <div class="price-amount">Custom</div>
+                <div class="price-period">for PMS, AIF, family offices</div>
+                <ul class="price-features">
+                    <li>Everything in Professional</li>
+                    <li>Custom sector coverage requests</li>
+                    <li>Historical comparisons (FY21&ndash;FY25)</li>
+                    <li>Management credibility scoring</li>
+                    <li>API access to structured data</li>
+                    <li>Dedicated analyst support</li>
+                </ul>
+                <a href="mailto:hello@connected-insights.ai" class="price-btn price-btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section id="subscribe">
+    <div class="container">
+        <div class="signup-section">
+            <h2>Get the next brief free</h2>
+            <p>Join investors who read annual reports the smart way. First two sector briefs are on us.</p>
+            <form class="signup-form" id="signupForm">
+                <input type="email" placeholder="you@example.com" required id="emailInput">
+                <button type="submit">Subscribe</button>
+            </form>
+            <div class="signup-success" id="signupSuccess">You're in. Check your inbox for the Banking sector brief.</div>
+            <p class="signup-note">No spam. Unsubscribe anytime. We only email when a new brief drops.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">Connected<span>.</span>Insights</div>
+    <p>Sector intelligence built from annual reports.</p>
+    <div class="footer-links">
+        <a href="mailto:hello@connected-insights.ai">Contact</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#briefs">Sample Briefs</a>
+    </div>
+    <p class="footer-disclaimer">Connected Insights is an information synthesis service. We do not provide investment advice, stock recommendations, or portfolio management services. All analysis is derived from publicly available annual reports filed by listed companies. Connected Insights is not registered with SEBI as a Research Analyst or Investment Advisor. Readers should consult a qualified financial advisor before making investment decisions.</p>
+</footer>
+
+<script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Signup form
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('emailInput').value;
+        // Store locally for now — integrate with email service later
+        const subscribers = JSON.parse(localStorage.getItem('ci_subscribers') || '[]');
+        subscribers.push({ email, date: new Date().toISOString() });
+        localStorage.setItem('ci_subscribers', JSON.stringify(subscribers));
+
+        this.style.display = 'none';
+        document.getElementById('signupSuccess').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>

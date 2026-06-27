@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Generated data & outputs (rebuilt on each system)
+data/
+reports/
+output/
+logs/
+pipeline/logs/
+
+# Large files / downloaded content
+CANDOR/
+Books/
+*.pdf
+*.xlsx
+*.xls
+
+# Temp/scratch files
+*.tmp
+temp_*.txt
+auditor_pages.txt
+cg_report_temp.txt
+extracted_cg_report.txt
+hdfc_pages_345_365.txt
+
+# IDE / editor
+.obsidian/
+.vscode/
+*.swp
+
+# Agent logs
+_agent.log
+scripts/_analysis_agent.log
+red_flag/_agent.log
+
+# OS
+Thumbs.db
+.DS_Store

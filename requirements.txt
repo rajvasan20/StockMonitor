@@ -1,4 +1,22 @@
-streamlit
-yfinance
-pandas
-xlsxwriter
+## Shared
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+numpy>=1.24.0
+
+## Red Flag — Notes Extractor
+pdfplumber>=0.10.0
+
+## Red Flag — MD&A Agent
+anthropic>=0.39.0
+
+## Red Flag — Downloader progress bar
+tqdm>=4.65.0
+
+## Technical Analysis — Price data
+yfinance>=0.2.30
+
+## Reports — PPT Generation
+python-pptx>=0.6.21
