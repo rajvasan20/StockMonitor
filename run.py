@@ -18,6 +18,7 @@ Usage:
     python run.py analyze-batch                    # Deep analysis for all 43 quality cos
     python run.py analyze-batch --dry-run          # Preview what would run
     python run.py analyze-ambient                  # Fire-and-forget /analyze for all pending
+    python run.py analyze-ambient --nifty50        # Nifty 50 only (skips already done)
     python run.py analyze-ambient --status         # Check progress
 
     python run.py integrity TCS                    # Management integrity report
@@ -136,7 +137,9 @@ def cmd_analyze_ambient(args):
     elif args.reset:
         clear_state()
     else:
-        run_ambient(dry_run=args.dry_run)
+        tickers = args.tickers if hasattr(args, 'tickers') else None
+        nifty50 = args.nifty50 if hasattr(args, 'nifty50') else False
+        run_ambient(dry_run=args.dry_run, nifty50=nifty50, tickers=tickers)
 
 
 def cmd_thesis(args):
@@ -495,6 +498,10 @@ def main():
                             help="Show progress without running")
     p_ambient.add_argument("--reset", action="store_true",
                             help="Clear state and start fresh")
+    p_ambient.add_argument("--nifty50", action="store_true",
+                            help="Process only Nifty 50 tickers (skips already done)")
+    p_ambient.add_argument("--tickers", nargs="+",
+                            help="Process specific tickers (e.g. --tickers TCS INFY)")
 
     # ── integrity ────────────────────────────────────────────────────────────
     p_int = subparsers.add_parser("integrity",

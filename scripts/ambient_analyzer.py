@@ -34,6 +34,20 @@ INTEGRATED_DIR = BASE_DIR / "output" / "quality_reports"
 STATE_FILE = BASE_DIR / "scripts" / "_ambient_state.json"
 LOG_FILE = BASE_DIR / "scripts" / "_ambient_analyzer.log"
 
+# ── Nifty 50 tickers ────────────────────────────────────────────────────────
+NIFTY50_TICKERS = [
+    "ADANIENT", "ADANIPORTS", "APOLLOHOSP", "ASIANPAINT", "AXISBANK",
+    "BAJAJ-AUTO", "BAJFINANCE", "BAJAJFINSV", "BHARTIARTL", "BPCL",
+    "BRITANNIA", "CIPLA", "COALINDIA", "DIVISLAB", "DRREDDY",
+    "EICHERMOT", "GRASIM", "HCLTECH", "HDFCBANK", "HDFCLIFE",
+    "HEROMOTOCO", "HINDPETRO", "HINDUNILVR", "ICICIBANK", "ICICIPRULI",
+    "INDUSINDBK", "INFY", "ITC", "JSWSTEEL", "KOTAKBANK",
+    "LT", "M&M", "MARUTI", "NESTLEIND", "NTPC",
+    "ONGC", "POWERGRID", "RELIANCE", "SBIN", "SBILIFE",
+    "SHREECEM", "SUNPHARMA", "TATACONSUM", "TATAMOTORS", "TATASTEEL",
+    "TCS", "TECHM", "TITAN", "ULTRACEMCO", "WIPRO",
+]
+
 # ── Config ───────────────────────────────────────────────────────────────────
 USAGE_LIMIT_FALLBACK_WAIT = 300  # 5 min fallback if reset time can't be parsed
 USAGE_LIMIT_MAX_WAIT = 3600     # 1 hour max fallback wait
@@ -136,6 +150,19 @@ def parse_reset_duration(output_text):
     return total_seconds + 60 if total_seconds > 0 else None
 
 
+def get_claude_path():
+    """Resolve claude CLI path — check PATH first, then known locations."""
+    import shutil
+    path = shutil.which("claude")
+    if path:
+        return path
+    # Known npm global install location on Windows
+    fallback = Path(os.environ.get("APPDATA", "")) / "npm" / "claude.cmd"
+    if fallback.exists():
+        return str(fallback)
+    return "claude"  # let it fail with a clear error
+
+
 def run_analyze(ticker):
     """Invoke claude CLI to run /analyze for a single ticker.
 
@@ -144,8 +171,9 @@ def run_analyze(ticker):
     """
     prompt = f"/analyze {ticker}"
 
+    claude_bin = get_claude_path()
     cmd = [
-        "claude",
+        claude_bin,
         "-p", prompt,
         "--dangerously-skip-permissions",
         "--model", "opus",
@@ -161,6 +189,7 @@ def run_analyze(ticker):
             text=True,
             timeout=7200,  # 2 hour timeout per ticker (these are long)
             cwd=str(BASE_DIR),
+            shell=(sys.platform == "win32"),  # needed for .cmd on Windows
         )
 
         output = (result.stdout or "") + (result.stderr or "")
@@ -195,11 +224,21 @@ def run_analyze(ticker):
         sys.exit(1)
 
 
-def run_ambient(dry_run=False):
+def run_ambient(dry_run=False, nifty50=False, tickers=None):
     """Main ambient loop — processes all pending tickers with retry logic."""
 
-    pending = get_pending_tickers()
-    total_quality = len(get_quality_tickers())
+    if tickers:
+        # Custom ticker list — filter to only pending ones
+        all_tickers = tickers
+        pending = [t for t in all_tickers if not is_completed(t)]
+        total_quality = len(all_tickers)
+    elif nifty50:
+        all_tickers = NIFTY50_TICKERS
+        pending = [t for t in all_tickers if not is_completed(t)]
+        total_quality = len(all_tickers)
+    else:
+        pending = get_pending_tickers()
+        total_quality = len(get_quality_tickers())
 
     log(f"{'=' * 60}")
     log(f"AMBIENT ANALYZER")
@@ -296,8 +335,13 @@ def run_ambient(dry_run=False):
         pending = get_pending_tickers()
 
     # Summary
-    now_done = total_quality - len(get_pending_tickers())
-    still_pending = get_pending_tickers()
+    if tickers or nifty50:
+        ticker_list = tickers if tickers else NIFTY50_TICKERS
+        still_pending = [t for t in ticker_list if not is_completed(t)]
+        now_done = len(ticker_list) - len(still_pending)
+    else:
+        now_done = total_quality - len(get_pending_tickers())
+        still_pending = get_pending_tickers()
 
     log(f"\n{'=' * 60}")
     log(f"AMBIENT COMPLETE")
@@ -348,6 +392,10 @@ def main():
                         help="Clear state file and start fresh")
     parser.add_argument("--status", action="store_true",
                         help="Show progress without running")
+    parser.add_argument("--nifty50", action="store_true",
+                        help="Process only Nifty 50 tickers (skips already done)")
+    parser.add_argument("--tickers", nargs="+",
+                        help="Process specific tickers (e.g. --tickers TCS INFY RELIANCE)")
 
     args = parser.parse_args()
 
@@ -357,7 +405,7 @@ def main():
         clear_state()
         print("State reset. Run without --reset to start processing.")
     else:
-        run_ambient(dry_run=args.dry_run)
+        run_ambient(dry_run=args.dry_run, nifty50=args.nifty50, tickers=args.tickers)
 
 
 if __name__ == "__main__":
