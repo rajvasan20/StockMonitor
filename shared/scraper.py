@@ -62,11 +62,36 @@ class ScreenerScraper:
 
     def fetch_company_html(self, ticker):
         """Fetch raw HTML for a ticker. Tries consolidated first, then standalone.
+        Falls back to standalone if consolidated page has no financial data.
         Returns (html_string, variant) or (None, None).
         """
         for variant in ["consolidated", ""]:
             url = SCREENER_BASE_URL.format(ticker=ticker, variant=variant)
             resp = self._get_with_retry(url)
             if resp is not None:
-                return resp.text, variant or "standalone"
+                html = resp.text
+                # Check if page has actual financial data (not just empty structure)
+                if variant == "consolidated" and not self._has_financial_data(html):
+                    logger.info(f"{ticker}: Consolidated page has no data, trying standalone")
+                    continue
+                return html, variant or "standalone"
         return None, None
+
+    @staticmethod
+    def _has_financial_data(html):
+        """Check if HTML contains actual financial data values."""
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(html, "lxml")
+        section = soup.find("section", id="profit-loss")
+        if not section:
+            return False
+        table = section.find("table")
+        if not table:
+            return False
+        rows = table.find_all("tr")
+        if len(rows) < 2:
+            return False
+        # Check if header row has year columns
+        header_cells = rows[0].find_all(["th", "td"])
+        year_texts = [c.get_text(strip=True) for c in header_cells[1:] if c.get_text(strip=True)]
+        return len(year_texts) > 0

@@ -17,6 +17,8 @@ Usage:
     python run.py analyze TRITURBINE --skill past-performance  # Past performance only
     python run.py analyze-batch                    # Deep analysis for all 43 quality cos
     python run.py analyze-batch --dry-run          # Preview what would run
+    python run.py analyze-ambient                  # Fire-and-forget /analyze for all pending
+    python run.py analyze-ambient --status         # Check progress
 
     python run.py integrity TCS                    # Management integrity report
     python run.py integrity TCS --from-year 2021    # Custom year range
@@ -123,6 +125,18 @@ def cmd_analyze_batch(args):
         dry_run=args.dry_run,
         force=args.force,
     )
+
+
+def cmd_analyze_ambient(args):
+    """Run ambient /analyze — fire-and-forget, auto-retry on usage limits."""
+    from scripts.ambient_analyzer import run_ambient, show_status, clear_state
+
+    if args.status:
+        show_status()
+    elif args.reset:
+        clear_state()
+    else:
+        run_ambient(dry_run=args.dry_run)
 
 
 def cmd_thesis(args):
@@ -472,6 +486,16 @@ def main():
     p_analyze_batch.add_argument("--force", action="store_true",
                                  help="Re-run even if output exists")
 
+    # ── analyze-ambient ─────────────────────────────────────────────────────
+    p_ambient = subparsers.add_parser("analyze-ambient",
+                                       help="Ambient /analyze — fire-and-forget, auto-retry on usage limits")
+    p_ambient.add_argument("--dry-run", action="store_true",
+                            help="Show what would be processed")
+    p_ambient.add_argument("--status", action="store_true",
+                            help="Show progress without running")
+    p_ambient.add_argument("--reset", action="store_true",
+                            help="Clear state and start fresh")
+
     # ── integrity ────────────────────────────────────────────────────────────
     p_int = subparsers.add_parser("integrity",
                                    help="Management integrity analysis (guidance vs reality)")
@@ -568,6 +592,7 @@ def main():
         "redflag-mda":      cmd_redflag_mda,
         "analyze":          cmd_analyze,
         "analyze-batch":    cmd_analyze_batch,
+        "analyze-ambient":  cmd_analyze_ambient,
         "integrity":        cmd_integrity,
         "thesis":           cmd_thesis,
         "theme":            cmd_theme,

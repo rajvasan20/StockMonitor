@@ -28,6 +28,7 @@ LOGS_DIR = os.path.join(BASE_DIR, "logs")
 # Module-specific data paths
 ANNUAL_REPORTS_DIR = os.path.join(DATA_DIR, "annual_reports")
 TICKER_EXCELS_DIR = os.path.join(DATA_DIR, "ticker_excels")
+SHAREHOLDING_DIR = os.path.join(DATA_DIR, "shareholding")
 NOTES_EXCEL_DIR = os.path.join(OUTPUT_DIR, "notes_excel")
 ANALYSES_DIR = os.path.join(OUTPUT_DIR, "analyses")
 

@@ -173,7 +173,7 @@ def analyze_company(ticker):
     result['fixed_assets'] = ([f for f in fixed_assets if f is not None] or [0])[-1]
     result['cwip'] = ([c for c in cwip if c is not None] or [0])[-1]
 
-    # Capital employed (latest and 4 years ago for incremental ROCE)
+    # Capital employed for incremental ROCE (multi-window)
     def calc_capital_employed(idx):
         eq = eq_clean[idx] if idx < len(eq_clean) else None
         res = res_clean[idx] if idx < len(res_clean) else None
@@ -183,7 +183,6 @@ def analyze_company(ticker):
         return None
 
     ce_latest = calc_capital_employed(-1)
-    ce_4y = calc_capital_employed(-5) if len(eq_clean) >= 5 else calc_capital_employed(0)
 
     # EBIT (PBT + Interest)
     int_clean = [safe_float(x) for x in (interest or []) if safe_float(x) is not None]
@@ -204,11 +203,22 @@ def analyze_company(ticker):
             pbt_list.append(op_raw[i])
 
     ebit_latest = pbt_list[-1] if pbt_list else None
-    ebit_4y = pbt_list[-5] if len(pbt_list) >= 5 else (pbt_list[0] if pbt_list else None)
 
-    # Incremental ROCE
-    if ce_latest and ce_4y and ebit_latest and ebit_4y and (ce_latest - ce_4y) > 0:
-        result['incremental_roce'] = ((ebit_latest - ebit_4y) / (ce_latest - ce_4y)) * 100
+    # Incremental ROCE — multi-window median (3Y, 5Y, 7Y)
+    # Using multiple windows smooths out capex cycle distortion.
+    # Divergence across windows itself signals inconsistent capital allocation.
+    inc_roce_windows = {}
+    for window in [3, 5, 7]:
+        ce_past = calc_capital_employed(-1 - window) if len(eq_clean) > window else None
+        ebit_past = pbt_list[-1 - window] if len(pbt_list) > window else None
+        if ce_latest and ce_past and ebit_latest and ebit_past and (ce_latest - ce_past) > 0:
+            inc_roce_windows[f'{window}Y'] = ((ebit_latest - ebit_past) / (ce_latest - ce_past)) * 100
+
+    result['incremental_roce_windows'] = inc_roce_windows if inc_roce_windows else None
+    if inc_roce_windows:
+        vals = sorted(inc_roce_windows.values())
+        mid = len(vals) // 2
+        result['incremental_roce'] = vals[mid] if len(vals) % 2 == 1 else (vals[mid - 1] + vals[mid]) / 2
     else:
         result['incremental_roce'] = None
 
@@ -471,7 +481,10 @@ def generate_report(r):
     lines.append("")
 
     if r.get('incremental_roce'):
-        lines.append(f"**Incremental ROCE:** {r['incremental_roce']:.1f}% (return on each new rupee invested)")
+        lines.append(f"**Incremental ROCE (median):** {r['incremental_roce']:.1f}%")
+        if r.get('incremental_roce_windows'):
+            window_str = " | ".join(f"{k}: {v:.1f}%" for k, v in r['incremental_roce_windows'].items())
+            lines.append(f"  *Windows: {window_str}*")
     lines.append(f"**Internal accruals:** Rs {r.get('internal_accruals', 0):.0f} Cr/year (retained earnings + depreciation)")
     lines.append(f"**Current EPS:** Rs {r.get('eps_current', 0):.1f}")
     lines.append("")
@@ -570,7 +583,10 @@ for tier, min_score, max_score in [("Tier 1: Highest Quality", 13, 99), ("Tier 2
             summary_lines.append(f"**10Y outlook:** Bear {r.get('cagr_10y_bear', 0):.0f}% / Base {r.get('cagr_10y_base', 0):.0f}% / Bull {r.get('cagr_10y_bull', 0):.0f}% CAGR")
 
         if r.get('incremental_roce'):
-            summary_lines.append(f"**Incremental ROCE:** {r['incremental_roce']:.1f}%")
+            window_detail = ""
+            if r.get('incremental_roce_windows'):
+                window_detail = " (" + " | ".join(f"{k}: {v:.1f}%" for k, v in r['incremental_roce_windows'].items()) + ")"
+            summary_lines.append(f"**Incremental ROCE:** {r['incremental_roce']:.1f}%{window_detail}")
 
         # Flags
         flags = []
